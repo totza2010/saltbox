@@ -1,0 +1,34 @@
+services:
+  komf:
+    restart: unless-stopped 
+    container_name: komf 
+    image: sndxr/komf:latest
+    hostname: komf 
+    environment: 
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Bangkok
+    networks: 
+      - saltbox
+    labels:
+      com.github.saltbox.saltbox_managed: true 
+      traefik.enable: true 
+      traefik.http.routers.komf-http.entrypoints: web 
+      traefik.http.routers.komf-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker
+      traefik.http.routers.komf-http.rule: Host(`komf.subsoul.site`) 
+      traefik.http.routers.komf-http.service: komf 
+      traefik.http.routers.komf.entrypoints: websecure 
+      traefik.http.routers.komf.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker
+      traefik.http.routers.komf.rule: Host(`komf.subsoul.site`) 
+      traefik.http.routers.komf.service: komf 
+      traefik.http.routers.komf.tls.certresolver: cfdns 
+      traefik.http.routers.komf.tls.options: securetls@file 
+      traefik.http.services.komf.loadbalancer.server.port: 8085
+      KOMF_LOG_LEVEL: INFO
+      JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
+    volumes: 
+      - /opt/komf:/config
+
+networks: 
+  saltbox:
+    external: true
