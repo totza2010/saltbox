@@ -1,33 +1,33 @@
 services:
-  komf:
-    restart: unless-stopped 
-    container_name: komf 
-    image: sndxr/komf:latest
-    hostname: komf 
-    environment: 
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Bangkok
-    networks: 
-      - saltbox
-    labels:
-      com.github.saltbox.saltbox_managed: true 
-      traefik.enable: true 
-      traefik.http.routers.komf-http.entrypoints: web 
-      traefik.http.routers.komf-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker
-      traefik.http.routers.komf-http.rule: Host(`komf.subsoul.site`) 
-      traefik.http.routers.komf-http.service: komf 
-      traefik.http.routers.komf.entrypoints: websecure 
-      traefik.http.routers.komf.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker
-      traefik.http.routers.komf.rule: Host(`komf.subsoul.site`) 
-      traefik.http.routers.komf.service: komf 
-      traefik.http.routers.komf.tls.certresolver: cfdns 
-      traefik.http.routers.komf.tls.options: securetls@file 
-      traefik.http.services.komf.loadbalancer.server.port: 8085
-      KOMF_LOG_LEVEL: INFO
-      JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
-    volumes: 
-      - /opt/komf:/config
+  # komf:
+  #   restart: unless-stopped 
+  #   container_name: komf 
+  #   image: sndxr/komf:latest
+  #   hostname: komf 
+  #   environment: 
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Asia/Bangkok
+  #   networks: 
+  #     - saltbox
+  #   labels:
+  #     com.github.saltbox.saltbox_managed: true 
+  #     traefik.enable: true 
+  #     traefik.http.routers.komf-http.entrypoints: web 
+  #     traefik.http.routers.komf-http.middlewares: globalHeaders@file,redirect-to-https@docker,robotHeaders@file,cloudflarewarp@docker
+  #     traefik.http.routers.komf-http.rule: Host(`komf.subsoul.site`) 
+  #     traefik.http.routers.komf-http.service: komf 
+  #     traefik.http.routers.komf.entrypoints: websecure 
+  #     traefik.http.routers.komf.middlewares: globalHeaders@file,secureHeaders@file,robotHeaders@file,cloudflarewarp@docker
+  #     traefik.http.routers.komf.rule: Host(`komf.subsoul.site`) 
+  #     traefik.http.routers.komf.service: komf 
+  #     traefik.http.routers.komf.tls.certresolver: cfdns 
+  #     traefik.http.routers.komf.tls.options: securetls@file 
+  #     traefik.http.services.komf.loadbalancer.server.port: 8085
+  #     KOMF_LOG_LEVEL: INFO
+  #     JAVA_TOOL_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseShenandoahGC -XX:ShenandoahGCHeuristics=compact -XX:ShenandoahGuaranteedGCInterval=3600000 -XX:TrimNativeHeapInterval=3600000
+  #   volumes: 
+  #     - /opt/komf:/config
   cloudflare-ddns:
     container_name: cloudflare-ddns 
     image: favonia/cloudflare-ddns:latest
@@ -56,6 +56,25 @@ services:
         # Your domains (separated by commas)
       - PROXIED=false
         # Tell Cloudflare to cache webpages and hide your IP (optional)
+  rclone-backup:
+    image: ghcr.io/bhunter234/rclone-backup # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
+    container_name: rclone-backup
+    environment:
+      - RCLONE_REMOTE_NAME=tgdrive # use any rclone remote to backup db file
+      - BACKUP_KEEP_DAYS=10
+      - CRON=0 */6 * * * # backup file every 6 hours
+      - ZIP_ENABLE=true
+      - DB_TYPE=postgresql
+      - PG_HOST=192.168.1.164:5432
+      - PG_DBNAME=teldrive
+      - PG_USERNAME=totza2010
+      - PG_PASSWORD=Musiclike.1994
+      - ZIP_PASSWORD=Musiclike.1994
+    restart: always
+    networks:
+     - saltbox
+    volumes:
+      - /home/totza2010/.config/rclone:/config/rclone
 
 networks: 
   saltbox:
