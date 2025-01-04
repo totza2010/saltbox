@@ -60,7 +60,7 @@ services:
     image: ghcr.io/bhunter234/rclone-backup # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
     container_name: rclone-backup
     environment:
-      - RCLONE_REMOTE_NAME=tgdrive # use any rclone remote to backup db file
+      - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
       - BACKUP_KEEP_DAYS=10
       - CRON=0 */6 * * * # backup file every 6 hours
       - ZIP_ENABLE=true
