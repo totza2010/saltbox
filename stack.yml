@@ -65,7 +65,7 @@ services:
       - CRON=0 */6 * * * # backup file every 6 hours
       - ZIP_ENABLE=true
       - DB_TYPE=postgresql
-      - PG_HOST=192.168.1.164
+      - PG_HOST=192.168.1.182
       - PG_DBNAME=teldrive
       - PG_USERNAME=totza2010
       - PG_PASSWORD=Musiclike.1994
