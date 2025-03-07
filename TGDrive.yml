@@ -1,0 +1,46 @@
+services:
+  tgdrive_db:
+    image: ghcr.io/tgdrive/postgres:17-alpine
+    container_name: tgdrive_db
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U totza2010 -d postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    environment:
+      - POSTGRES_USER=totza2010
+      - POSTGRES_PASSWORD=Musiclike.1994
+    volumes:
+      - /opt/tgdrive/postgres_data:/var/lib/postgresql/data
+      - /opt/tgdrive/init-scripts:/docker-entrypoint-initdb.d
+    user: root
+    ports:
+      - 5432:5432
+  tgdrive:
+    image: ghcr.io/tgdrive/teldrive
+    container_name: tgdrive
+    restart: always
+    depends_on:
+      tgdrive_db:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - /opt/tgdrive/tgdrive.toml:/config.toml
+      - /opt/tgdrive/tgdrive.db:/storage.db
+    ports:
+      - 8080:8080
+  tgdrive2:
+    image: ghcr.io/tgdrive/teldrive
+    container_name: tgdrive2
+    restart: always
+    depends_on:
+      tgdrive_db:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - /opt/tgdrive/tgdrive2.toml:/config.toml
+      - /opt/tgdrive/tgdrive2.db:/storage.db
+    ports:
+      - 8181:8080
