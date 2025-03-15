@@ -57,7 +57,7 @@ services:
       - PROXIED=false
         # Tell Cloudflare to cache webpages and hide your IP (optional)
   rclone-backup:
-    image: ghcr.io/bhunter234/rclone-backup # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
+    image: teldrive/rclone-backup:17 # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
     container_name: rclone-backup
     environment:
       - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
