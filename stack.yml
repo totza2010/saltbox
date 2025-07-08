@@ -50,7 +50,7 @@ services:
     security_opt: [no-new-privileges:true]
     # Another protection to restrict superuser privileges (optional but recommended)
     environment:
-      - CF_API_TOKEN=J7SWr795otX8UdjYhqiOoTx9fSqPQInDFix698lo
+      - CF_API_TOKEN=ITZQsYo0dXOP16EmA68461jmjIkbBh8nIABFu1Px
         # Your Cloudflare API token
       - DOMAINS=privox.top
         # Your domains (separated by commas)
