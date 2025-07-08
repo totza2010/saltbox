@@ -66,8 +66,8 @@ services:
       - ZIP_ENABLE=true
       - ZIP_PASSWORD=Musiclike.1994
       - DB_TYPE=postgresql
-      - POSTGRES_CONNECTION_1=postgresql://totza2010:Musiclike.1994@192.168.1.169/teldrive
-      - POSTGRES_CONNECTION_2=postgresql://totza2010:Musiclike.1994@192.168.1.169/teldrive2
+      - PG_CONNECTION_STRING=postgresql://totza2010:Musiclike.1994@192.168.1.169/teldrive
+      - PG_CONNECTION_STRING_1=postgresql://totza2010:Musiclike.1994@192.168.1.169/teldrive2
     restart: always
     networks:
      - saltbox
