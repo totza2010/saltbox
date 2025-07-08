@@ -72,7 +72,7 @@ services:
     networks:
      - saltbox
     volumes:
-      - /home/totza2010/.config/rclone/:/app/rclone
+      - /home/totza2010/.config/rclone/:/config/rclone
 
 networks: 
   saltbox:
