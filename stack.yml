@@ -58,7 +58,7 @@ services:
         # Tell Cloudflare to cache webpages and hide your IP (optional)
   backup-teldrive:
     image: teldrive/rclone-backup:17 # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
-    container_name: rclone-backup
+    container_name: backup-teldrive
     environment:
       - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
       - BACKUP_KEEP_DAYS=10
@@ -77,7 +77,7 @@ services:
       - /home/totza2010/.config/rclone/:/app/rclone
   backup-teldrive2:
     image: teldrive/rclone-backup:17 # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
-    container_name: rclone-backup
+    container_name: backup-teldrive2
     environment:
       - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
       - BACKUP_KEEP_DAYS=10
