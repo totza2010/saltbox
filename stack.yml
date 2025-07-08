@@ -52,11 +52,11 @@ services:
     environment:
       - CF_API_TOKEN=J7SWr795otX8UdjYhqiOoTx9fSqPQInDFix698lo
         # Your Cloudflare API token
-      - DOMAINS=subsoul.site
+      - DOMAINS=privox.top
         # Your domains (separated by commas)
       - PROXIED=false
         # Tell Cloudflare to cache webpages and hide your IP (optional)
-  rclone-backup:
+  backup-teldrive:
     image: teldrive/rclone-backup:17 # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
     container_name: rclone-backup
     environment:
@@ -67,6 +67,25 @@ services:
       - DB_TYPE=postgresql
       - PG_HOST=192.168.1.169
       - PG_DBNAME=teldrive
+      - PG_USERNAME=totza2010
+      - PG_PASSWORD=Musiclike.1994
+      - ZIP_PASSWORD=Musiclike.1994
+    restart: always
+    networks:
+     - saltbox
+    volumes:
+      - /home/totza2010/.config/rclone/:/app/rclone
+  backup-teldrive2:
+    image: teldrive/rclone-backup:17 # for postgres 16 use ghcr.io/adrienpoupa/rclone-backup
+    container_name: rclone-backup
+    environment:
+      - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
+      - BACKUP_KEEP_DAYS=10
+      - CRON=0 */6 * * * # backup file every 6 hours
+      - ZIP_ENABLE=true
+      - DB_TYPE=postgresql
+      - PG_HOST=192.168.1.169
+      - PG_DBNAME=teldrive2
       - PG_USERNAME=totza2010
       - PG_PASSWORD=Musiclike.1994
       - ZIP_PASSWORD=Musiclike.1994
