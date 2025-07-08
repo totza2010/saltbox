@@ -62,7 +62,8 @@ services:
     environment:
       - RCLONE_REMOTE_NAME=OneDrive
       - BACKUP_KEEP_DAYS=10
-      - CRON=*/1 * * * * # every 1 minute for testing
+      - BACKUP_FILE_DATE_SUFFIX=_%H%M
+      - CRON=0 * * * * # every 1 minute for testing
       - ZIP_ENABLE=true
       - ZIP_PASSWORD=Musiclike.1994
       - DB_TYPE=postgresql
