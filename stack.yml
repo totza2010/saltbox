@@ -62,7 +62,7 @@ services:
     environment:
       - RCLONE_REMOTE_NAME=OneDrive # use any rclone remote to backup db file
       - BACKUP_KEEP_DAYS=10
-      - CRON=0 */6 * * * # backup file every 6 hours
+      - CRON=*/1 * * * * # backup file every 6 hours
       - ZIP_ENABLE=true
       - ZIP_PASSWORD=Musiclike.1994
       - DB_TYPE=postgresql
