@@ -41,6 +41,5 @@ services:
         restart: true
     volumes:
       - /opt/tgdrive/tgdrive2.toml:/config.toml
-      - /opt/tgdrive/tgdrive2.db:/storage.db
     ports:
       - 8181:8080
