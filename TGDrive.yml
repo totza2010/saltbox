@@ -31,7 +31,7 @@ services:
     ports:
       - 8080:8080
   tgdrive2:
-    image: ghcr.io/tgdrive/teldrive
+    image: ghcr.io/tgdrive/teldrive:1.6.19
     container_name: tgdrive2
     restart: always
     depends_on:
@@ -40,5 +40,6 @@ services:
         restart: true
     volumes:
       - /opt/tgdrive/tgdrive2.toml:/config.toml
+      - /opt/tgdrive/tgdrive.db:/storage.db
     ports:
       - 8181:8080
