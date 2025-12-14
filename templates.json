@@ -1,0 +1,55 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "categories": [
+        "Cloud",
+        "Productivity",
+        "Tools",
+        "Web"
+      ],
+      "description": "Teldrive is a powerful utility that enables you to organise your telegram files and much more. It provides a user-friendly web interface to manage and access your Telegram files seamlessly. With Teldrive, you can easily sort, search, and download your files directly from your Telegram account. Whether you're looking to declutter your chats or need quick access to important documents, Teldrive has got you covered.",
+      "env": [
+        {
+          "label": "DRIVE_NAME",
+          "name": "DRIVE_NAME"
+        },
+        {
+          "default": "tgdrive",
+          "label": "DB_USER",
+          "name": "DB_USER"
+        },
+        {
+          "default": "tgdrive",
+          "label": "DB_DB",
+          "name": "DB_DB"
+        },
+        {
+          "label": "DB_PASSWORD",
+          "name": "DB_PASSWORD"
+        },
+        {
+          "default": "5432",
+          "label": "DB_PORT",
+          "name": "DB_PORT"
+        },
+        {
+          "default": "8080",
+          "label": "APP_PORT",
+          "name": "APP_PORT"
+        }
+      ],
+      "logo": "https://raw.githubusercontent.com/tgdrive/teldrive-ui/refs/heads/main/public/images/apple-touch-icon.png",
+      "name": "TgDrive",
+      "note": "Teldrive is a powerful utility that enables you to organise your telegram files and much more.",
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/totza2010/saltbox",
+        "stackfile": "Template/Stack/docker-compose.yml"
+      },
+      "title": "TgDrive",
+      "type": 3,
+      "maintainer": "https://github.com/totza2010/saltbox/"
+    }
+  ]
+}
