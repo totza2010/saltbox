@@ -31,7 +31,6 @@
         {
           "label": "Database Password",
           "name": "DB_PASSWORD",
-          "type": "password",
           "description": "รหัสผ่านผู้ใช้ฐานข้อมูล (จะถูกซ่อนเมื่อป้อน)"
         },
         {
