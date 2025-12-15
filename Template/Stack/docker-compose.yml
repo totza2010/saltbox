@@ -17,7 +17,7 @@ services:
       timeout: 5s
       retries: 5
   app:
-    image: ghcr.io/tgdrive/teldrive:1.6.19
+    image: ghcr.io/tgdrive/teldrive:${TELDRIVE_VERSION}
     container_name: tgdrive_${DRIVE_NAME}
     restart: always
     depends_on:

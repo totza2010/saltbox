@@ -12,31 +12,47 @@
       "env": [
         {
           "label": "DRIVE_NAME",
-          "name": "DRIVE_NAME"
+          "name": "DRIVE_NAME",
+          "default": "tgdrive",
+          "description": "ชื่อชุดข้อมูล (จะใช้เป็นชื่อ title ของ stack และเป็น prefix สำหรับ path และ container)"
         },
         {
           "default": "tgdrive",
           "label": "DB_USER",
-          "name": "DB_USER"
+          "name": "DB_USER",
+          "description": "ชื่อผู้ใช้สำหรับฐานข้อมูล PostgreSQL (ค่าเริ่มต้น: tgdrive)"
         },
         {
           "default": "tgdrive",
           "label": "DB_DB",
-          "name": "DB_DB"
+          "name": "DB_DB",
+          "description": "ชื่อฐานข้อมูล PostgreSQL ที่จะถูกสร้าง (ค่าเริ่มต้น: tgdrive)"
         },
         {
           "label": "DB_PASSWORD",
-          "name": "DB_PASSWORD"
+          "name": "DB_PASSWORD",
+          "type": "password",
+          "description": "รหัสผ่านผู้ใช้ฐานข้อมูล (จะถูกซ่อนเมื่อป้อน)"
         },
         {
           "default": "5432",
           "label": "DB_PORT",
-          "name": "DB_PORT"
+          "name": "DB_PORT",
+          "description": "พอร์ตที่แมปไปยัง PostgreSQL ในเครื่องโฮสต์ (ค่าเริ่มต้น: 5432)"
         },
         {
           "default": "8080",
           "label": "APP_PORT",
-          "name": "APP_PORT"
+          "name": "APP_PORT",
+          "description": "พอร์ตที่แมปไปยังเว็บแอปของ Teldrive (ค่าเริ่มต้น: 8080)"
+        },
+        {
+          "label": "TELDRIVE_VERSION",
+          "name": "TELDRIVE_VERSION",
+          "default": "1.6.19",
+          "type": "option",
+          "options": ["1.6.19", "1.6.20", "1.7.0", "latest"],
+          "description": "เลือกเวอร์ชันของ Teldrive ที่จะใช้ (ตัวอย่าง: 1.6.19 หรือ latest)"
         }
       ],
       "logo": "https://raw.githubusercontent.com/tgdrive/teldrive-ui/refs/heads/main/public/images/apple-touch-icon.png",
@@ -47,7 +63,7 @@
         "url": "https://github.com/totza2010/saltbox",
         "stackfile": "Template/Stack/docker-compose.yml"
       },
-      "title": "TgDrive",
+      "title": "${DRIVE_NAME}",
       "type": 3,
       "maintainer": "https://github.com/totza2010/saltbox/"
     }
