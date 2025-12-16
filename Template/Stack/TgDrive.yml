@@ -2,7 +2,6 @@ services:
   db:
     image: groonga/pgroonga:latest-alpine-17
     container_name: tgdrive_${DRIVE_NAME}_db
-    user: ${PUID}:${PGID}
     restart: always
     environment:
       - TZ=${TZ}
