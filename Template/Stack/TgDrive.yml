@@ -4,7 +4,6 @@ services:
     container_name: tgdrive_${DRIVE_NAME}_db
     user: ${PUID}:${PGID}
     restart: always
-    networks: [tgdrive_db]
     environment:
       - TZ=${TZ}
       - POSTGRES_USER=${DB_USER}
