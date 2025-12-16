@@ -1,5 +1,5 @@
 {
-  "version": "2",
+  "version": "3",
   "templates": [
     {
       "categories": [
@@ -15,6 +15,21 @@
           "name": "DRIVE_NAME",
           "default": "tgdrive",
           "description": "ชื่อชุดข้อมูล (จะใช้เป็นชื่อ title ของ stack และเป็น prefix สำหรับ path และ container)"
+        },
+        {
+          "default": "1000",
+          "label": "PUID",
+          "name": "PUID"
+        },
+        {
+          "default": "1000",
+          "label": "PGID",
+          "name": "PGID"
+        },
+        {
+          "default": "Asia/Bangkok",
+          "label": "TZ",
+          "name": "TZ"
         },
         {
           "default": "tgdrive",
@@ -34,15 +49,15 @@
           "description": "รหัสผ่านผู้ใช้ฐานข้อมูล (จะถูกซ่อนเมื่อป้อน)"
         },
         {
-          "default": "5432",
           "label": "Database Port",
           "name": "DB_PORT",
-          "description": "พอร์ตที่แมปไปยัง PostgreSQL ในเครื่องโฮสต์ (ค่าเริ่มต้น: 5432)"
+          "default": "5432",
+          "description": "พอร์ตที่ใช้สำหรับฐานข้อมูล PostgreSQL (ค่าเริ่มต้น: 5432)"
         },
         {
-          "default": "8080",
           "label": "TgDrive Port",
           "name": "APP_PORT",
+          "default": "8080",
           "description": "พอร์ตที่แมปไปยังเว็บแอปของ Teldrive (ค่าเริ่มต้น: 8080)"
         },
         {
@@ -68,16 +83,16 @@
         }
       ],
       "logo": "https://raw.githubusercontent.com/tgdrive/teldrive-ui/refs/heads/main/public/images/apple-touch-icon.png",
-      "name": "TgDrive",
+      "name": "tgdrive",
       "note": "Teldrive is a powerful utility that enables you to organise your telegram files and much more.",
       "platform": "linux",
       "repository": {
         "url": "https://github.com/totza2010/saltbox",
-        "stackfile": "Template/Stack/docker-compose.yml"
+        "stackfile": "Template/Stack/TgDrive.yml"
       },
       "title": "TgDrive",
       "type": 3,
-      "maintainer": "https://github.com/totza2010/saltbox/"
+      "maintainer": " https://github.com/totza2010/saltbox/"
     }
   ]
 }

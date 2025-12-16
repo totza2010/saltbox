@@ -2,28 +2,34 @@ services:
   db:
     image: groonga/pgroonga:latest-alpine-17
     container_name: tgdrive_${DRIVE_NAME}_db
+    user: ${PUID}:${PGID}
     restart: always
+    networks: [tgdrive_db]
     environment:
+      - TZ=${TZ}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - /opt/tgdrive/${DRIVE_NAME}/postgres_data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
       interval: 5s
       timeout: 5s
       retries: 5
+    ports:
+      - "${DB_PORT}:5432"
   app:
     image: ghcr.io/tgdrive/teldrive:${TELDRIVE_VERSION}
     container_name: tgdrive_${DRIVE_NAME}
+    user: ${PUID}:${PGID}
     restart: always
     depends_on:
       db:
         condition: service_healthy
         restart: true
+    environment:
+      - TZ=${TZ}
     volumes:
       - /opt/tgdrive/${DRIVE_NAME}/config.toml:/config.toml
       - /opt/tgdrive/${DRIVE_NAME}/storage.db:/storage.db
